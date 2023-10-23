@@ -2,16 +2,17 @@
 
 To run:
 
-cargo run --  --message "Off to the bunker. Every person for themselves" --encrypt --shift 10
+cargo run -- --message "Off to the bunker. Every person for themselves" --encrypt --shift 10
 
 To decrypt:
 
-cargo run --  --message "Ypp dy dro lexuob. Ofobi zobcyx pyb drowcovfoc" --decrypt --shift 10
+cargo run -- --message "Ypp dy dro lexuob. Ofobi zobcyx pyb drowcovfoc" --decrypt --shift 10
 
 */
 
 use caeser_cipher_cli::{decrypt, encrypt};
 use clap::Parser;
+use std::time::Instant;
 
 /// CLI tool to encrypt and decrypt messages using the caeser cipher
 #[derive(Parser, Debug)]
@@ -21,7 +22,7 @@ struct Args {
     #[arg(short, long)]
     encrypt: bool,
 
-    /// decrypt the message
+    /// Decrypt the message
     #[arg(short, long)]
     decrypt: bool,
 
@@ -39,9 +40,12 @@ struct Args {
     uppercase: bool,
 }
 
-// run it
 fn main() {
     let args = Args::parse();
+
+    // Start measuring time
+    let start_time = Instant::now();
+
     if args.encrypt {
         let result = encrypt(&args.message, args.shift);
         if args.uppercase {
@@ -59,6 +63,13 @@ fn main() {
     } else {
         println!("Please specify either --encrypt or --decrypt");
     }
+
+    // Calculate the elapsed time
+    let end_time = Instant::now();
+    let elapsed_time = end_time.duration_since(start_time);
+
+    // Print the time in microseconds
+    println!("Elapsed time: {} microseconds", elapsed_time.as_micros());
 
     println!("Thank you for using the caeser cipher CLI!");
 }
