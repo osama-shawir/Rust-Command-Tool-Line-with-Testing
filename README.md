@@ -47,6 +47,10 @@ python caesar_cipher.py --message "<your_message>" --encrypt
 
 Include the same flags and preferences that you used for the rust experiment and compare the time it takes compared to rust.
 
+The figure below demonstrates these operations and their results:
+
+![Image Alt Text](Rust-Py-Comp.png)
+
 ## Conclusion
 
 In this performance comparison, Rust demonstrates its significant performance advantages over Python when implementing the Caesar cipher algorithm. Rust was able to complete the operation in just 19 microseconds, while Python required 473 microseconds for the same task. 
